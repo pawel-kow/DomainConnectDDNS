@@ -1,3 +1,7 @@
 os: windows
 language: csharp
-solution: DomainConnectDDNSUpdate.sln
+solution: 
+install:
+  - nuget restore DomainConnectDDNSUpdate.sln
+script:
+  - msbuild /p:Configuration=Release DomainConnectDDNSUpdate.sln
