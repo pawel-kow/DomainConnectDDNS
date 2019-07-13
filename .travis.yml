@@ -2,6 +2,12 @@ os: windows
 language: bash
 env:
   - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+install:
+  - mkdir .nuget
+  - cd .nuget
+  - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - cd ..
+  - .nuget\nuget.exe restore DomainConnectDDNSUpdate.sln
 script:
   - export PATH=$MSBUILD_PATH:$PATH
   - MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
