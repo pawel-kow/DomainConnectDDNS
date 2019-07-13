@@ -13,7 +13,7 @@ script:
 - MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
 - mkdir ArtifactOutput
 - 7z.exe a -r ArtifactOutput/DomainConnectDDNS.zip ./bin/Release/* README.md -x!*settings* -x!*.pdb
-- unzip -l DomainConnectDDNS.zip
+- unzip -l ArtifactOutput/DomainConnectDDNS.zip
 deploy:
   provider: releases
   skip_cleanup: true
