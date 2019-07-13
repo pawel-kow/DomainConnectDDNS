@@ -1,6 +1,5 @@
 os: windows
 language: csharp
-solution: 
 install:
   - nuget restore DomainConnectDDNSUpdate.sln
 script:
