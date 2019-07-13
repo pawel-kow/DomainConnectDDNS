@@ -4,12 +4,12 @@ env:
 - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
 install:
 - wget http://downloads.sourceforge.net/gnuwin32/zip-3.0-setup.exe
-- zip-3.0-setup.exe /VERYSILENT /SUPPRESSMSGBOXES
+- ./zip-3.0-setup.exe /VERYSILENT /SUPPRESSMSGBOXES
 - mkdir .nuget
 - cd .nuget
 - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 - cd ..
-- ".nuget/nuget.exe restore DomainConnectDDNSUpdate.sln"
+- .nuget/nuget.exe restore DomainConnectDDNSUpdate.sln
 script:
 - export PATH=$MSBUILD_PATH:$PATH
 - MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
