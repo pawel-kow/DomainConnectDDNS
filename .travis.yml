@@ -1,6 +1,4 @@
 os: windows
 language: bash
-install:
-  - nuget restore DomainConnectDDNSUpdate.sln
 script:
   - msbuild /p:Configuration=Release DomainConnectDDNSUpdate.sln
