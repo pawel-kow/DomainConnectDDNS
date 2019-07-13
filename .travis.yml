@@ -1,13 +1,22 @@
 os: windows
 language: bash
 env:
-  - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+- MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
 install:
-  - mkdir .nuget
-  - cd .nuget
-  - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-  - cd ..
-  - .nuget/nuget.exe restore DomainConnectDDNSUpdate.sln
+- mkdir .nuget
+- cd .nuget
+- wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+- cd ..
+- ".nuget/nuget.exe restore DomainConnectDDNSUpdate.sln"
 script:
-  - export PATH=$MSBUILD_PATH:$PATH
-  - MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
+- export PATH=$MSBUILD_PATH:$PATH
+- MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
+- zip -r DomainConnectDDNS.zip bin/Release/* README.md -x *settings* -x *.pdb
+skip_cleanup: true
+deploy:
+  provider: releases
+  api_key:
+    secure: V8EIcL/oOZ861OO4qDht7SqlSCCBXyurOJfPHGvxCuySfMShIDL7C275Jnj0K9LfhTVEN71AJauqixl74E+VlaFSgHVIebtK/kSxWxeZw0ifFkg3YQuWP7RcINeDKfbYWUVTFpC79vD1Q3GDglxTtjDsgDXNRYdb/wdBypFVvu+CFn/0ZHmgGJ1fpmV5E6cAjWkv+T4RDMNWfzVKKjf344bnkkws3T30hwUWid+C8CJCKn1xGwvkbbq5qWZL/29yXed2aQ6cZAmZgZQ6ZWiM/mztxzn2GJsVd2fT4bpa9XS8LtlyR+b5LrpU4xhTpD+C1XYUffHVP45PSBiM3le6gpWYvYEQkHJAj88dIBBZyb34S9S6YwZx7yjTOFllCA9ReUIj2blpon78yvgNoF6dwChv+C1W7/KpJp1T5xWmC+RbtD9DWYwU1ekOQXWk2jFiNqKvBu9QFZkwJ/ATgm4noAY50G12ExX/WDSgkAMT/UoZI9RIhVfcyTzHz5QxmX2CUF7Sb/AjydUrrWqIUhi8kqeDTM1i2XJDkpYINrBQzgMKDTs+pH3JPpAAmIblGSDdfubNqS0StYvEoQpm+tx/Mb/c4u/0WeYI85EKXN7X0/KEHgyg6ziHnnoGwygZD8oNKlQnjwg+aucZhJZqKdmzc9NgdjiZWE1zTl5nDUf7KWo=
+  file: DomainConnectDDNS.zip
+  on:
+    tags: true
