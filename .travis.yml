@@ -1,5 +1,5 @@
 os: windows
-language: generic
+language: bash
 install:
   - nuget restore DomainConnectDDNSUpdate.sln
 script:
