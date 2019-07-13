@@ -12,8 +12,7 @@ script:
 - export PATH=$MSBUILD_PATH:$PATH
 - MSBuild.exe DomainConnectDDNSUpdate.sln -t:Build -p:Configuration=Release
 - mkdir ArtifactOutput
-- cd ArtifactOutput
-- 7z.exe -tzip -r DomainConnectDDNS.zip bin/Release/* README.md -x *settings* -x *.pdb
+- 7z.exe -tzip -r ArtifactOutput/DomainConnectDDNS.zip bin/Release/* README.md -x *settings* -x *.pdb
 - unzip -l DomainConnectDDNS.zip
 skip_cleanup: true
 deploy:
